@@ -8,7 +8,7 @@ Default policy backbone is configurable via `BASE_MODEL` (see [`src/config.py`](
 
 1. **Data** — Generate or stream Python function snippets, attach gold docstrings, and build SFT and test splits ([`src/phase_1/`](src/phase_1/README.md)).
 2. **SFT** — Train the policy to imitate gold docstrings ([`src/phase_2/`](src/phase_2/README.md)).
-3. **Preferences** — Sample multiple docstrings per function from the SFT model and collect pairwise preferences (e.g. via a blind LLM judge) ([`src/phase_3/`](src/phase_3/README.md)).
+3. **Preferences** — Sample multiple docstrings per function from the SFT model and collect pairwise preferences via humans ([hosted Streamlit app](https://trl-ppo-for-docstring.streamlit.app/)) or automation (e.g. a blind LLM judge) ([`src/phase_3/`](src/phase_3/)).
 4. **Reward model** — Train a sequence-classification-style reward model on chosen vs rejected pairs ([`src/phase_4/`](src/phase_4/README.md)).
 5. **PPO setup** — Build prompt-only data and a reward hook for RL ([`src/phase_5/`](src/phase_5/README.md)).
 6. **PPO** — Fine-tune the policy with TRL’s PPO trainer against the reward model ([`src/phase_6/`](src/phase_6/README.md)).
@@ -32,6 +32,8 @@ pip install -r requirements.txt
 Copy `.env` from your template and set variables required by the scripts you run. Phase 1 data generation and docstring completion use an LLM client that expects endpoint and auth-related variables (see [`src/phase_1/helper.py`](src/phase_1/helper.py) and the Phase 1–3 READMEs). At minimum, many flows need `GPT_OSS_20B_URL` and `MODEL_ACCESS_CERT` where those scripts apply.
 
 Optional: `import_preferences_from_supabase.py` uses `SUPABASE_URL` and `SUPABASE_KEY` if you import preferences from Supabase instead of generating them locally.
+
+**Human preference collection:** The Streamlit UI at [https://trl-ppo-for-docstring.streamlit.app/](https://trl-ppo-for-docstring.streamlit.app/) shows random function code and two docstring candidates; the chosen and rejected texts are inserted into Supabase (`input`, `chosen`, `rejected`). Run it locally with `streamlit run src/phase_3/preference_collection_app.py` (same env vars as the import script).
 
 ### Run order (full pipeline)
 
@@ -72,7 +74,7 @@ Each phase’s `README.md` lists inputs, outputs, and prerequisites.
 
 - [Phase 1 — Data](src/phase_1/README.md)
 - [Phase 2 — SFT](src/phase_2/README.md)
-- [Phase 3 — Candidates & preferences](src/phase_3/README.md)
+- Phase 3 — Candidates & preferences ([`src/phase_3/`](src/phase_3/); [hosted preference app](https://trl-ppo-for-docstring.streamlit.app/))
 - [Phase 4 — Reward model](src/phase_4/README.md)
 - [Phase 5 — PPO prompts & reward](src/phase_5/README.md)
 - [Phase 6 — PPO training](src/phase_6/README.md)
