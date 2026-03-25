@@ -35,7 +35,7 @@ load_dotenv(REPO_ROOT / ".env")
 from clean_candidates import dedupe_candidate_strings, load_jsonl_with_line_errors, repair_row_for_judge
 
 DEFAULT_CANDIDATES = REPO_ROOT / "data" / "phase_3" / "candidates.jsonl"
-DEFAULT_TABLE = "preference_pairs"
+DEFAULT_TABLE = "preferences"
 
 
 def get_client() -> Client:
