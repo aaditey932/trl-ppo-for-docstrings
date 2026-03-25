@@ -1,0 +1,9 @@
+openai>=1.0.0
+transformers>=4.36
+datasets
+trl
+torch
+tensorboard
+python-dotenv
+tqdm>=4.27
+supabase>=2.0.0

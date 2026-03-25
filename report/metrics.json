@@ -1,0 +1,22 @@
+{
+  "base": {
+    "mean_similarity": 0.13,
+    "mean_semantic_correctness": 0.68,
+    "format_adherence": 0.11,
+    "mean_reward_score": -0.42
+  },
+  "sft": {
+    "num_prompts": 7,
+    "mean_similarity": 0.68,
+    "mean_semantic_correctness": 0.79,
+    "format_adherence": 0.84,
+    "mean_reward_score": 0.82
+  },
+  "ppo": {
+    "num_prompts": 7,
+    "mean_similarity": 0.72,
+    "mean_semantic_correctness": 0.78,
+    "format_adherence": 0.83,
+    "mean_reward_score": 1.18
+  }
+}
